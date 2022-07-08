@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+    image: node:16
+    environment:
+      - NODE_ENV=developpement
+    volumes:
+      - ./api.qonnectiqode/:/api.qonnectiqode
+      - /api.qonnectiqode/node_modules
+
+    expose:
+      - 8080:3000
+    command: "yarn start:dev"
+
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    environment:
+      PMA_USER: ${DB_USER}
+      PMA_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 8081:80
+    depends_on:
+      - db
+
+  db:
+    image: mariadb:${MARIADB_VERSION}
+    restart: on-failure
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./.data/db:/var/lib/mysql

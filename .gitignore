@@ -1,0 +1,7 @@
+*
+
+!.env
+!.gitignore
+!Dockerfile
+!dockcer-compose.yaml
+!Readme.md
