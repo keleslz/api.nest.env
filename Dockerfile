@@ -1,9 +1,11 @@
 FROM node:16-alpine
 
-WORKDIR /api.qonnectiqode
+WORKDIR /api_test_nest
 
 USER root
 
-COPY ./api.qonnectiqode .
+COPY ./api.test.nest .
 
 RUN yarn install --no-cache
+
+CMD ["tail", "-f", "/dev/null"]

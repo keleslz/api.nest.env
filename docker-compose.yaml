@@ -8,12 +8,9 @@ services:
     environment:
       - NODE_ENV=developpement
     volumes:
-      - ./api.qonnectiqode/:/api.qonnectiqode
-      - /api.qonnectiqode/node_modules
-
-    expose:
+      - ./api.test.nest/:/api_test_nest
+    ports:
       - 8080:3000
-    command: "yarn start:dev"
 
 
   phpmyadmin:
